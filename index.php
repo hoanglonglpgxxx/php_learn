@@ -1,4 +1,5 @@
 <?php
+require 'helpers.php';
 // $name = 'long';
 // echo 'hi',' ','my 123name\'s '. $name;
 // echo '<br>hi',' '," my name's {$name}";
@@ -196,7 +197,8 @@ echo sum2(...$arr); */
 //4.  Types of func
 //Scope of func
 // Anony func chỉ gọi được các variable trong scope
-// muốn dùng var từ ở ngoài thì phải thêm use sau phần khai báo param
+//is_callable($tên_func)
+//có thể access func bên ngoài bằng use
 /* // ! Ex:
 $x = 1;
 $sum = function(...$numbers) use ($x){
@@ -205,15 +207,45 @@ $sum = function(...$numbers) use ($x){
 };
 echo $sum(1,2,3,4); */
 //Callback func
-$arr = [1,2,3,4];
+/* $arr = [1,2,3,4];
 function foo($elem) {
     return $elem * 2;
 }
 
 $arr2 = array_map('foo', $arr);
-print_r($arr2);
+print_r($arr2); */
 
+/**
+ * Date Time
+* $currentTime = time();
+* echo $currentTime + 5 * 24 * 60 * 60 .'<br/>'; // 5 ngày,24h,60',60s
+* echo date('Y-m-d H:i',$currentTime);
+* $date = date('Y-m-d H:i',$currentTime);
+* echo '<pre>';
+* print_r(date_parse($date));// return array detail của date
+* echo '</pre>';*/
 
+//Useful built in Array Func
+$items = ['a'=>1, 'b'=>1, 'c'=>1, 'd'=>4,'e'=>5];
+$items2 = ['a', 'b', 'c', 'd','e','f','g'];
+$items3 = [1, 1, 1, 4,5,20,50];
+//1. array_chunk: chia array thành các array nhỏ với n item
+//param cuối là optional, true/false: preserveKeys
+// printVal(array_chunk($items,2,true));
 
+//2. array_combine:trả array với key từ param1, val từ param2
+//khác size là err
+// printVal(array_combine($items3,$items2));
 
+//3.array filter: filter array = callback, trả về array
+//k có callback thì trả về array gốc(trừ các value false)
+// $even = array_filter($items3, fn($number,$key) => $number % 2 === 0, ARRAY_FILTER_USE_BOTH );
+//có thể reindex array trả về: $even = array_values($even)
+// printVal($even);
 
+//4. array_keys: return keys of array;
+//array_keys($array_var, $search_value)
+$keys = array_keys($items);
+printVal($keys);
+$keys = array_keys($items,1);
+printVal($keys);
