@@ -1,15 +1,15 @@
 <?php
 require 'helpers.php';
-// require './Basic/const,variable.php';
-// require './Basic/array.php';
-// require './Basic/array_built_in_func.php';
-// require './Basic/function.php';
-// require './Basic/filesystem.php';
-// require './Basic/OOP.php';
-
+// require '../Basic/const,variable.php';
+// require '../Basic/array.php';
+// require '../Basic/array_built_in_func.php';
+// require '../Basic/function.php';
+// require '../Basic/filesystem.php';
+// require '../Basic/OOP.php';
+require '../Transaction.php';
 
 // require './Demo1/demo1.php';
-$root = dirname(__DIR__) . DIRECTORY_SEPARATOR;
+$root = dirname(__DIR__) . DIRECTORY_SEPARATOR . '/src/public/';
 $requiredFiles = get_included_files();
 
 //? Indclude files
@@ -20,8 +20,8 @@ $requiredFiles = get_included_files();
 //Demo 1
 /* function runDemo1(){
     global $root;
-    define ('FILES_PATH', $root . 'php_learn/Demo1/transaction_files' . DIRECTORY_SEPARATOR);
-    define ('VIEWS_PATH', $root . 'php_learn/Demo1/views' . DIRECTORY_SEPARATOR);
+    define ('FILES_PATH', './Demo1/transaction_files' . DIRECTORY_SEPARATOR);
+    define ('VIEWS_PATH', './Demo1/views' . DIRECTORY_SEPARATOR);
 
     $files = getTransactionFiles(FILES_PATH);
     $transactions= [];
@@ -35,5 +35,10 @@ $requiredFiles = get_included_files();
     // printArr($transactions);
 
     require VIEWS_PATH . 'transactions.php';
-} */
-// containsFile('demo1.php', 'runDemo1');
+}
+containsFile('demo1.php', 'runDemo1'); */
+$transaction = (new Transaction(100, 'Transaction1'))
+    ->addTax(8)
+    ->applyDiscount(15);
+// Gán value: $transaction->amount = 50;
+var_dump($transaction->getAmount());
