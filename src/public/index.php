@@ -6,11 +6,17 @@ require 'helpers.php';
 // require '../Basic/function.php';
 // require '../Basic/filesystem.php';
 // require '../Basic/OOP.php';
-require '../app/Transaction.php';
-require '../app/Customer.php';
-require '../app/PaymentProfile.php';
-require '../app/Enum/Status.php';
+// require '../app/Transaction.php';
+// require '../app/Customer.php';
+// require '../app/PaymentProfile.php';
+// require '../app/Enum/Status.php';
+// require '../app/Input/Field.php';
+// require '../app/Input/Boolean.php';
+// require '../app/Input/Text.php';
+// require '../app/Input/Radio.php';
+// require '../app/Input/Checkbox.php';
 
+require __DIR__ . '/../vendor/autoload.php';
 // require './Demo1/demo1.php';
 $root = dirname(__DIR__) . DIRECTORY_SEPARATOR . '/src/public/';
 $requiredFiles = get_included_files();
@@ -46,6 +52,7 @@ containsFile('demo1.php', 'runDemo1'); */
     ->applyDiscount(15) */;
 // Gán value: $transaction->amount = 50;
 // var_dump($transaction->getAmount());
+use App\Transactions\Transaction;
 
 $transaction = (new Transaction(100, 'Transaction1'));
 // $transaction->getCustomer() = new Customer();
@@ -57,3 +64,15 @@ $transaction = (new Transaction(100, 'Transaction1'));
 use App\Enum\Status;
 
 // var_dump($transaction->setStatus(Status::PAID));
+
+$fields = [
+    new \App\Input\Field('baseFeild'),
+    new \App\Input\Text('textFeild'),
+    new \App\Input\Boolean('booleanFeild'),
+    new \App\Input\Checkbox('checkboxFeild'),
+    new \App\Input\Radio('radioFeild'),
+];
+
+foreach ($fields as $field) {
+    echo $field->render() . '<br/>';
+}

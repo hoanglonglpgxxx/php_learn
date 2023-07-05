@@ -1,6 +1,6 @@
 <?php
 
-namespace Payment\PaymentDetail;
+namespace App\PaymentDetail;
 
 class PaymentProfile
 {

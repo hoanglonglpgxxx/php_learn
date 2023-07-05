@@ -1,8 +1,11 @@
 <?php
+
+namespace App\Transactions;
+
 class Transaction
 {
     public static int $count = 0;
-    private ?Customer $customer = null;
+    private ?\App\Customers\Customer $customer = null;
     private string $status;
 
     //Constructor kiểu cũ(below PHP 8.0)

@@ -1,3 +1,4 @@
+<?php
 //Useful built in Array Func
 // $items = ['a'=>1, 'b'=>1, 'c'=>1, 'd'=>4,'e'=>5];
 // $items2 = ['a', 'b', 'c', 'd','e','f','g'];
