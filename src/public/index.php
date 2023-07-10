@@ -21,13 +21,15 @@ require __DIR__ . '/../vendor/autoload.php';
 $root = dirname(__DIR__) . DIRECTORY_SEPARATOR . '/src/public/';
 $requiredFiles = get_included_files();
 
-    //? Indclude files
-    // include : k có file thì warning, code vẫn chạy
-    // require: k có file thì warning, k chạy code dưới
-    //include_once, require_once: như 2 trên, nhưng chỉ include file 1 lần
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-    //Demo 1
-    /* function runDemo1(){
+//? Indclude files
+// include : k có file thì warning, code vẫn chạy
+// require: k có file thì warning, k chạy code dưới
+//include_once, require_once: như 2 trên, nhưng chỉ include file 1 lần
+
+//Demo 1
+/* function runDemo1(){
     global $root;
     define ('FILES_PATH', './Demo1/transaction_files' . DIRECTORY_SEPARATOR);
     define ('VIEWS_PATH', './Demo1/views' . DIRECTORY_SEPARATOR);
@@ -46,14 +48,6 @@ $requiredFiles = get_included_files();
     require VIEWS_PATH . 'transactions.php';
 }
 containsFile('demo1.php', 'runDemo1'); */
-    //-------------------------------------
-    /* $transaction = (new Transaction(100, 'Transaction1'))
-    ->addTax(8)
-    ->applyDiscount(15) */;
-// Gán value: $transaction->amount = 50;
-// var_dump($transaction->getAmount());
-use App\Transactions\Transaction;
-use App\Enum\Status;
 
 // $transaction = (new Transaction(100, 'Transaction1'));
 // $transaction->getCustomer() = new Customer();
@@ -77,6 +71,34 @@ foreach ($fields as $field) {
     echo $field->render() . '<br/>';
 } */
 
-$collector = new \App\DebtCollectionService();
+// $newInvoice = new \App\Invoice(new \App\Customer());
+/* try {
+    $newInvoice->process(25);
+} catch (\App\Exception\Missing $e) {
+    echo $e->getMessage() . ' ' . $e->getFile() . ': ' . $e->getLine() . PHP_EOL;
+} catch (\InvalidArgumentException) {
+    echo 'Invalid argument excetion' . PHP_EOL;
+} finally {
+    echo 'Finally block' . PHP_EOL;
+} */
 
-echo $collector->collectDebt(new \App\CollectionAgency()) . PHP_EOL;
+/* function process()
+{
+    $newInvoice = new \App\Invoice(new \App\Customer());
+
+    try {
+        $newInvoice->process(25);
+        return true;
+    } catch (\App\Exception\Missing $exception) {
+        echo $exception->getMessage() . ' ' . $exception->getFile() . ': ' . $exception->getLine() . PHP_EOL;
+        return false;
+    } catch (\InvalidArgumentException) {
+        echo 'Invalid argument excetion' . PHP_EOL;
+        return false;
+    } finally {
+        echo 'Finally block' . PHP_EOL;
+        return -1;
+    }
+}
+var_dump(process());
+ */
