@@ -4,7 +4,7 @@ namespace App;
 
 class Invoice
 {
-    public function __construct(public Customer $customer)
+/*    public function __construct(public Customer $customer)
     {
     }
 
@@ -23,5 +23,11 @@ class Invoice
 
         sleep(1);
         echo 'OK' . PHP_EOL;
+    }*/
+    public string $id;
+
+    public function __construct(public float $amount)
+    {
+        $this->id = random_int(1000, 9999999);
     }
 }

@@ -102,3 +102,18 @@ foreach ($fields as $field) {
 }
 var_dump(process());
  */
+
+$invoiceCollection = new \App\InvoicesCollection([new \App\Invoice(15),new \App\Invoice(1552),new \App\Invoice(155),new \App\Invoice(25)]);
+
+foreach($invoiceCollection as $invoice) {
+    echo $invoice->id . ' - ' . $invoice->amount . PHP_EOL . '</br>';
+}
+
+function foo(iterable $iterable) {
+ foreach ( $iterable as $item) {
+     echo $item->id . ' - ' . $item->amount . PHP_EOL . '</br>';
+
+ }
+}
+
+foo($invoiceCollection);
