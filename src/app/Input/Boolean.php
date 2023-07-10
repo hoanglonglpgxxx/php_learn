@@ -2,6 +2,6 @@
 
 namespace App\Input;
 
-class Boolean extends Field
+abstract class Boolean extends Field
 {
 }

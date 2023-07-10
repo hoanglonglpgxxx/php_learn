@@ -53,26 +53,30 @@ containsFile('demo1.php', 'runDemo1'); */
 // Gán value: $transaction->amount = 50;
 // var_dump($transaction->getAmount());
 use App\Transactions\Transaction;
+use App\Enum\Status;
 
-$transaction = (new Transaction(100, 'Transaction1'));
+// $transaction = (new Transaction(100, 'Transaction1'));
 // $transaction->getCustomer() = new Customer();
 
 //Nullsafe operator
 //khi 1 step sai -> các step sau bị discard
 // echo $transaction->getCustomer()?->getPaymentProfile()?->id ?? 'foo';
 // echo Transaction::STATUS_PAID;
-use App\Enum\Status;
 
 // var_dump($transaction->setStatus(Status::PAID));
 
-$fields = [
-    new \App\Input\Field('baseFeild'),
+/* $fields = [
+    // new \App\Input\Field('baseFeild'),
     new \App\Input\Text('textFeild'),
-    new \App\Input\Boolean('booleanFeild'),
+    // new \App\Input\Boolean('booleanFeild'),
     new \App\Input\Checkbox('checkboxFeild'),
     new \App\Input\Radio('radioFeild'),
 ];
 
 foreach ($fields as $field) {
     echo $field->render() . '<br/>';
-}
+} */
+
+$collector = new \App\DebtCollectionService();
+
+echo $collector->collectDebt(new \App\CollectionAgency()) . PHP_EOL;
