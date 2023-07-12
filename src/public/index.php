@@ -103,17 +103,38 @@ foreach ($fields as $field) {
 var_dump(process());
  */
 
-$invoiceCollection = new \App\InvoicesCollection([new \App\Invoice(15),new \App\Invoice(1552),new \App\Invoice(155),new \App\Invoice(25)]);
+/*$invoiceCollection = new \App\InvoicesCollection([new \App\Invoice(15),new \App\Invoice(1552),new \App\Invoice(155),new \App\Invoice(25)]);
 
 foreach($invoiceCollection as $invoice) {
     echo $invoice->id . ' - ' . $invoice->amount . PHP_EOL . '</br>';
-}
+}*/
 
-function foo(iterable $iterable) {
- foreach ( $iterable as $item) {
-     echo $item->id . ' - ' . $item->amount . PHP_EOL . '</br>';
+/*function foo(iterable $iterable) {
+ foreach ( $iterable as  $i => $item) {
+     echo $item->id . ' - ' . $item->amount . ' index ' . $i . PHP_EOL . '</br>';
 
  }
 }
+foo($invoiceCollection);*/
 
-foo($invoiceCollection);
+/*
+ * SUPER GLOBALS
+ * */
+session_start();
+define('STORAGE_PATH', __DIR__ . '/../storage');
+define('VIEW_PATH', __DIR__ . '/../views');
+try {
+    $router = new \App\Router();
+    $router
+        ->get('/', [\App\Controllers\Home::class, 'index'])
+        ->get('/download', [\App\Controllers\Home::class, 'download'])
+        ->post('/upload', [\App\Controllers\Home::class, 'upload'])
+        ->get('/invoices', [\App\Controllers\Invoice::class, 'index'])
+        ->get('/invoices/create', [\App\Controllers\Invoice::class, 'create'])
+        ->post('/invoices/create', [\App\Controllers\Invoice::class, 'store']);
+    echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
+} catch(\App\Exception\RouteNotFoundException $e) {
+//    header('HTTP/1.1 404 Not Found');
+    http_response_code(404);
+    echo \App\View::make('error/404');
+}

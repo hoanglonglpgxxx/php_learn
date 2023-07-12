@@ -16,7 +16,7 @@ class Invoice
         }
 
         if (empty($this->customer->getBillingInfo())) {
-            throw new \App\Exception\Missing();
+                throw new \App\Exception\Missing();
         }
 
         echo 'Processing $' . $amount . ' invoice -';
