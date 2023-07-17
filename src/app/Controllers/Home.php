@@ -7,6 +7,7 @@ use App\View;
 class Home
 {
         public function index() : View {
+            phpInfo();
             return  View::make('index', ['foo' => 'bar', 'fooao' => 'barasd']);
         }
 

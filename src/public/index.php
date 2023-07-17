@@ -127,8 +127,8 @@ try {
     $router = new \App\Router();
     $router
         ->get('/', [\App\Controllers\Home::class, 'index'])
-        ->get('/download', [\App\Controllers\Home::class, 'download'])
-        ->post('/upload', [\App\Controllers\Home::class, 'upload'])
+//        ->get('/download', [\App\Controllers\Home::class, 'download'])
+//        ->post('/upload', [\App\Controllers\Home::class, 'upload'])
         ->get('/invoices', [\App\Controllers\Invoice::class, 'index'])
         ->get('/invoices/create', [\App\Controllers\Invoice::class, 'create'])
         ->post('/invoices/create', [\App\Controllers\Invoice::class, 'store']);
