@@ -1,8 +1,8 @@
 <?php
-function printArr(array $value)
+function printArr($value)
 {
     echo '<pre>';
-    print_r($value);
+    var_dump($value);
     echo '</pre>';
 }
 
