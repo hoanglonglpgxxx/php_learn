@@ -1,23 +1,13 @@
 <?php
-require 'helpers.php';
-// require '../Basic/const,variable.php';
-// require '../Basic/array.php';
-// require '../Basic/array_built_in_func.php';
-// require '../Basic/function.php';
-// require '../Basic/filesystem.php';
-// require '../Basic/OOP.php';
-// require '../app/Transaction.php';
-// require '../app/Customer.php';
-// require '../app/PaymentProfile.php';
-// require '../app/Enum/Status.php';
-// require '../app/Input/Field.php';
-// require '../app/Input/Boolean.php';
-// require '../app/Input/Text.php';
-// require '../app/Input/Radio.php';
-// require '../app/Input/Checkbox.php';
 
+use App\App;
+use aPP\Config;
+
+require 'helpers.php';
 require __DIR__ . '/../vendor/autoload.php';
-// require './Demo1/demo1.php';
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
 $root = dirname(__DIR__) . DIRECTORY_SEPARATOR . '/src/public/';
 $requiredFiles = get_included_files();
 
@@ -123,18 +113,13 @@ foo($invoiceCollection);*/
 session_start();
 define('STORAGE_PATH', __DIR__ . '/../storage');
 define('VIEW_PATH', __DIR__ . '/../views');
-try {
     $router = new \App\Router();
     $router
         ->get('/', [\App\Controllers\Home::class, 'index'])
-        ->get('/download', [\App\Controllers\Home::class, 'download'])
-        ->post('/upload', [\App\Controllers\Home::class, 'upload'])
+//        ->get('/download', [\App\Controllers\Home::class, 'download'])
+//        ->post('/upload', [\App\Controllers\Home::class, 'upload'])
         ->get('/invoices', [\App\Controllers\Invoice::class, 'index'])
         ->get('/invoices/create', [\App\Controllers\Invoice::class, 'create'])
         ->post('/invoices/create', [\App\Controllers\Invoice::class, 'store']);
-    echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
-} catch(\App\Exception\RouteNotFoundException $e) {
-//    header('HTTP/1.1 404 Not Found');
-    http_response_code(404);
-    echo \App\View::make('error/404');
-}
+(new App($router, ['uri'=>$_SERVER['REQUEST_URI'], 'method'=>$_SERVER['REQUEST_METHOD']],
+    new \App\Config($_ENV)))->run();

@@ -27,7 +27,6 @@ class View
 
         foreach ($this->params as $key => $value) {
             $$key = $value;
-            var_dump($$key);
         };
         ob_start();
 
